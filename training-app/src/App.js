@@ -1,15 +1,36 @@
-import { useState } from "react"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import CreateList from "./Components/CreateList"
 import "./App.css"
-import MyName from "./Components/MyName"
+import Navigation from "./Components/Navigaton"
+import styled from "styled-components"
 
 function App() {
-  const [title, SetTitle] = useState("Moja pierwsza stronka")
+  const [data, takeData] = useState(null)
+  const [page, changePage] = useState(1)
+  useEffect(
+    () =>
+      axios
+        .get(`https://rickandmortyapi.com/api/character/?page=${page}`)
+        .then((response) => takeData(response)),
+    [page]
+  )
+
+  if (!data) {
+    return <div className="App">Brak danych z backendu</div>
+  }
+  if (page < 1) {
+    changePage(page + 1)
+  }
+  if (page > 34) {
+    return changePage(page - 1)
+  }
+  console.log(data)
   return (
     <div className="App">
-      <h1>{title}</h1>
-      <MyName />
+      <Navigation data={data} page={page} function1={changePage} />
+      <CreateList data={data} />
     </div>
   )
 }
-
 export default App
