@@ -20,7 +20,7 @@ import picture1 from "./Images/picture1.jpg"
 
 const FirstPart = styled.div`
   width: 100%;
-  height: 50%;
+  height: 56.3%;
   background-image: url(${picture1});
   background-size: cover;
   background-position: center;
@@ -114,7 +114,6 @@ const SecondPart = styled.div`
   display: flex;
   flex-direction: column;
   align-content: space-between;
-  margin: 0;
 `
 
 const useStylesIcon = makeStyles({

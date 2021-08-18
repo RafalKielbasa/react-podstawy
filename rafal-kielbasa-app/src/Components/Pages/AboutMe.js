@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     maxWidth: 360,
     fontWeight: 700,
+    color: "#f5f9e4",
 
     "& .MuiListItemText-root": {
       color: "#f5f9e4",
@@ -38,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Container = styled.div`
-  padding-top: 6%;
   width: 100%;
-  height: 89vh;
+  height: 90.3%;
+  padding-top: 5%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

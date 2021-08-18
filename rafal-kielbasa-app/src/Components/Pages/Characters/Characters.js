@@ -3,9 +3,8 @@ import styled from "styled-components"
 import CreateList from "./CreateList"
 
 const Container = styled.div`
-  padding-top: 6%;
   width: 99%;
-  height: 89vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

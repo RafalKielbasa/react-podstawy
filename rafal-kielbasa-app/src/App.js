@@ -11,13 +11,8 @@ import Registration from "./Components/Pages/Registration"
 import LogIn from "./Components/Pages/LogIn"
 import CharacterInformation from "./Components/Pages/Characters/CharacterInformation"
 
-const Display = styled.div`
-  width: 100vw;
-  height: 100vh;
-`
 const Content = styled.div`
-  width: 100%;
-  height: 100%;
+  height: 94%;
 `
 
 const StyledLink = styled(Link)`
@@ -40,7 +35,6 @@ const Logo = styled(Link)`
   }
 `
 const Navigation = styled.div`
-  width: 100%;
   height: 6%;
   background-color: #0c2934;
   padding-top: 0;
@@ -48,7 +42,7 @@ const Navigation = styled.div`
   justify-content: space-between;
   align-items: center;
   min-height: 60px;
-  position: fixed;
+  position: sticky;
   top: 0;
 `
 
@@ -88,55 +82,53 @@ function App() {
   }
   console.log("status", status)
   return (
-    <Display>
-      <Router>
-        <Navigation>
-          <Logo to="/">kielb-IT</Logo>
-          <Pages>
-            <StyledLink to="/about-me">About Me</StyledLink>
-            <StyledLink to="/stoper">Stoper</StyledLink>
-            <StyledLink to="/counter">Counter</StyledLink>
-            <StyledLink to="/characters">Characters</StyledLink>
-            <StyledLink to="/registration">Registration</StyledLink>
-            <StyledLink to="/log-in">Log in</StyledLink>
-          </Pages>
-        </Navigation>
-        <Content>
-          <Switch>
-            <Route exact path="/">
-              <MainPage />
-            </Route>
-            <Route exact path="/about-me">
-              <AboutMe object={rk} />
-            </Route>
-            <Route exact path="/stoper">
-              <Stoper start={10} increment={10} />
-            </Route>
-            <Route exact path="/counter">
-              <Counter />
-            </Route>
-            <Route exact path="/characters">
-              <Characters
-                data={data}
-                page={page}
-                funct={changePage}
-                status={status}
-                statusFun={changeStatus}
-              />
-            </Route>
-            <Route path="/characters/:id">
-              <CharacterInformation data={data} />
-            </Route>
-            <Route exact path="/registration">
-              <Registration />
-            </Route>
-            <Route exact path="/log-in">
-              <LogIn />
-            </Route>
-          </Switch>
-        </Content>
-      </Router>
-    </Display>
+    <Router>
+      <Navigation>
+        <Logo to="/">kielb-IT</Logo>
+        <Pages>
+          <StyledLink to="/about-me">About Me</StyledLink>
+          <StyledLink to="/stoper">Stoper</StyledLink>
+          <StyledLink to="/counter">Counter</StyledLink>
+          <StyledLink to="/characters">Characters</StyledLink>
+          <StyledLink to="/registration">Registration</StyledLink>
+          <StyledLink to="/log-in">Log in</StyledLink>
+        </Pages>
+      </Navigation>
+      <Content>
+        <Switch>
+          <Content exact path="/">
+            <MainPage />
+          </Content>
+          <Route exact path="/about-me">
+            <AboutMe object={rk} />
+          </Route>
+          <Route exact path="/stoper">
+            <Stoper start={10} increment={10} />
+          </Route>
+          <Route exact path="/counter">
+            <Counter />
+          </Route>
+          <Route exact path="/characters">
+            <Characters
+              data={data}
+              page={page}
+              funct={changePage}
+              status={status}
+              statusFun={changeStatus}
+            />
+          </Route>
+          <Route path="/characters/:id">
+            <CharacterInformation data={data} />
+          </Route>
+          <Route exact path="/registration">
+            <Registration />
+          </Route>
+          <Route exact path="/log-in">
+            <LogIn />
+          </Route>
+        </Switch>
+      </Content>
+    </Router>
   )
 }
 
