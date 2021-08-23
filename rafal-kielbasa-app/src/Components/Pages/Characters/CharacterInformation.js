@@ -27,7 +27,7 @@ function CharacterInformation() {
   if (!data) {
     return <div className="App">Brak danych z backendu</div>
   }
-  console.log(data)
+
   return (
     <Container>
       <div>{`Name: ${data.data.name}`}</div>

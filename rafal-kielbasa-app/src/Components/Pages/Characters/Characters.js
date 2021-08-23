@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import Switch from "@material-ui/core/Switch"
 import CreateList from "./CreateList"
 
 const Container = styled.div`
@@ -11,6 +12,13 @@ const Container = styled.div`
 `
 
 function Characters({ data, page, funct, status, statusFun }) {
+  const statusOptions = [
+    { value: "", tag: "ALL" },
+    { value: "dead", tag: "Dead" },
+    { value: "alive", tag: "Alive" },
+    { value: "unknown", tag: "Unknown" },
+  ]
+
   return (
     <Container>
       <div>Characters</div>
@@ -18,11 +26,11 @@ function Characters({ data, page, funct, status, statusFun }) {
       <button onClick={() => funct(page + 1)}>Next</button>
       <button onClick={() => funct(page - 1)}>Previous</button>
       <select value={status} onChange={(e) => statusFun(e.target.value)}>
-        <option value="">All</option>
-        <option value="dead">Dead</option>
-        <option value="alive">Alive</option>
-        <option value="unknown">Unknown</option>
+        {statusOptions.map((e) => {
+          return <option value={e.value}>{e.tag}</option>
+        })}
       </select>
+      <Switch></Switch>
       <CreateList data={data}></CreateList>
     </Container>
   )
