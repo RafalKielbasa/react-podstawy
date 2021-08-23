@@ -54,25 +54,22 @@ const CircleImage = styled.img`
   height: 240px;
   border-radius: 50%; ;
 `
-export function rafalKielbasa() {
-  return {
+
+function AboutMe() {
+  const [open, setOpen] = React.useState(false)
+  const handleClick = () => {
+    setOpen(!open)
+  }
+  const classes = useStyles()
+  const myData = {
     Name: "Rafał",
     Surname: "Kiełbasa",
     Age: 29,
     Career: "Chef",
     Hobbys: "Definitely too much",
   }
-}
 
-function AboutMe({ object }) {
-  const [open, setOpen] = React.useState(false)
-
-  const handleClick = () => {
-    setOpen(!open)
-  }
-  const classes = useStyles()
-
-  const array = Object.keys(object)
+  const array = Object.keys(myData)
 
   return (
     <Container>
@@ -89,12 +86,12 @@ function AboutMe({ object }) {
         <div>
           {array.map((element) => {
             return (
-              <Collapse in={open} timeout="auto" unmountOnExit>
+              <Collapse key={element} in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   <ListItem button className={classes.nested}>
                     <ListItemText
                       primary={element}
-                      secondary={object[element]}
+                      secondary={myData[element]}
                     />
                   </ListItem>
                 </List>

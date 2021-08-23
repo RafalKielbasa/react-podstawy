@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom"
 import styled from "styled-components"
-import axios from "axios"
+
 import { useState, useEffect } from "react"
-import AboutMe, { rafalKielbasa } from "./Components/Pages/AboutMe"
+import AboutMe from "./Components/Pages/AboutMe"
 import Counter from "./Components/Pages/Counter"
 import MainPage from "./Components/Pages/MainPage"
 import Stoper from "./Components/Pages/Stoper"
@@ -10,6 +10,7 @@ import Characters from "./Components/Pages/Characters/Characters"
 import Registration from "./Components/Pages/Registration"
 import LogIn from "./Components/Pages/LogIn"
 import CharacterInformation from "./Components/Pages/Characters/CharacterInformation"
+import useFetch from "./hooks/useFetch"
 
 const Content = styled.div`
   height: 94%;
@@ -54,44 +55,73 @@ const Pages = styled.div`
   font-family: "Pacifico", cursive;
   font-size: 1.2rem;
 `
-const rk = rafalKielbasa()
 
 function App() {
-  const [data, takeData] = useState(null)
   const [page, changePage] = useState(1)
   const [status, changeStatus] = useState("")
-  useEffect(
-    () =>
-      axios
-        .get(
-          `https://rickandmortyapi.com/api/character/?page=${page}&status=${status}`
-        )
-        .then((response) => takeData(response)),
+  const [switchState, setSwitch] = useState(false)
+  const { response, error, isLoading } = useFetch(
+    `https://rickandmortyapi.com/api/character/?page=${page}&status=${status}`,
     [page, status]
   )
   useEffect(() => changePage(1), [status])
-
-  if (!data) {
+  if (isLoading) {
+    return <div className="App">Is loading...</div>
+  }
+  if (!response) {
     return <div className="App">Brak danych z backendu</div>
   }
+
   if (page < 1) {
     changePage(page + 1)
   }
-  if (page > data.data.info.pages) {
+  if (page > response.data.info.pages) {
     return changePage(page - 1)
   }
-  console.log("status", status)
+  const linksArray = [
+    {
+      id: 1,
+      path: "/about-me",
+      outcome: "About Me",
+    },
+    {
+      id: 2,
+      path: "/stoper",
+      outcome: "Stoper",
+    },
+    {
+      id: 3,
+      path: "/counter",
+      outcome: "Counter",
+    },
+    {
+      id: 4,
+      path: "/characters",
+      outcome: "Characters",
+    },
+    {
+      id: 5,
+      path: "/registration",
+      outcome: "Registration",
+    },
+    {
+      id: 6,
+      path: "/log-in",
+      outcome: "Log in",
+    },
+  ]
   return (
     <Router>
       <Navigation>
         <Logo to="/">kielb-IT</Logo>
         <Pages>
-          <StyledLink to="/about-me">About Me</StyledLink>
-          <StyledLink to="/stoper">Stoper</StyledLink>
-          <StyledLink to="/counter">Counter</StyledLink>
-          <StyledLink to="/characters">Characters</StyledLink>
-          <StyledLink to="/registration">Registration</StyledLink>
-          <StyledLink to="/log-in">Log in</StyledLink>
+          {linksArray.map((e) => {
+            return (
+              <StyledLink key={e.id} to={e.path}>
+                {e.outcome}
+              </StyledLink>
+            )
+          })}
         </Pages>
       </Navigation>
       <Content>
@@ -100,7 +130,7 @@ function App() {
             <MainPage />
           </Content>
           <Route exact path="/about-me">
-            <AboutMe object={rk} />
+            <AboutMe />
           </Route>
           <Route exact path="/stoper">
             <Stoper start={10} increment={10} />
@@ -110,15 +140,17 @@ function App() {
           </Route>
           <Route exact path="/characters">
             <Characters
-              data={data}
+              data={response}
               page={page}
               funct={changePage}
               status={status}
               statusFun={changeStatus}
+              switchState={switchState}
+              switchFunction={setSwitch}
             />
           </Route>
           <Route path="/characters/:id">
-            <CharacterInformation data={data} />
+            <CharacterInformation data={response} />
           </Route>
           <Route exact path="/registration">
             <Registration />

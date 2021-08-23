@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
-import Switch from "@material-ui/core/Switch"
+import { Switch } from "@material-ui/core"
+
 import CreateList from "./CreateList"
 
 const Container = styled.div`
@@ -11,7 +12,15 @@ const Container = styled.div`
   align-items: center;
 `
 
-function Characters({ data, page, funct, status, statusFun }) {
+function Characters({
+  data,
+  page,
+  funct,
+  status,
+  statusFun,
+  switchState,
+  switchFunction,
+}) {
   const statusOptions = [
     { value: "", tag: "ALL" },
     { value: "dead", tag: "Dead" },
@@ -19,6 +28,9 @@ function Characters({ data, page, funct, status, statusFun }) {
     { value: "unknown", tag: "Unknown" },
   ]
 
+  const handleChange = (event) => {
+    switchFunction(event.target.checked)
+  }
   return (
     <Container>
       <div>Characters</div>
@@ -30,7 +42,7 @@ function Characters({ data, page, funct, status, statusFun }) {
           return <option value={e.value}>{e.tag}</option>
         })}
       </select>
-      <Switch></Switch>
+      <Switch checked={switchState} onChange={handleChange} />
       <CreateList data={data}></CreateList>
     </Container>
   )

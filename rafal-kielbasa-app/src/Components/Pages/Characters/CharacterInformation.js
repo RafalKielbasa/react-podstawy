@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { useParams } from "react-router"
 import { useHistory } from "react-router-dom"
-import axios from "axios"
+import useFetch from "../../../hooks/useFetch"
 
 const Container = styled.div`
   padding-top: 6%;
@@ -16,25 +16,30 @@ const Container = styled.div`
 function CharacterInformation() {
   const slug = useParams()
   const history = useHistory()
-  const [data, takeData] = useState(null)
-  useEffect(
-    () =>
-      axios
-        .get(`https://rickandmortyapi.com/api/character/${slug.id}`)
-        .then((response) => takeData(response)),
-    []
+  const { response, isLoading } = useFetch(
+    `https://rickandmortyapi.com/api/character/${slug.id}`
   )
-  if (!data) {
+
+  if (isLoading) {
+    return <div className="App">Is loading...</div>
+  }
+  if (!response) {
     return <div className="App">Brak danych z backendu</div>
   }
+  const data = response.data
+  const charactersInfo = [
+    { name: "Name:", data: data.name },
+    { name: "Status:", data: data.status },
+    { name: "Species:", data: data.species },
+    { name: "Location:", data: data.location.name },
+    { name: "Origin:", data: data.origin.name },
+  ]
 
   return (
     <Container>
-      <div>{`Name: ${data.data.name}`}</div>
-      <div>{`Status:${data.data.status}`}</div>
-      <div>{`Species:${data.data.species} `}</div>
-      <div>{`Location: ${data.data.location.name}`}</div>
-      <div>{`Origin: ${data.data.origin.name}`}</div>
+      {charactersInfo.map((e) => {
+        return <div>{`${e.name} ${e.data}`}</div>
+      })}
       <button onClick={() => history.push("/characters")}>Back</button>
     </Container>
   )

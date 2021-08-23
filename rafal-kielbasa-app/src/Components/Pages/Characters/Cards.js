@@ -21,7 +21,7 @@ const Data = styled.div`
 function CreateCard({ name, species, status, image, id }) {
   return (
     <>
-      <Card to={`characters/${id}`}>
+      <Card key={id} to={`characters/${id}`}>
         <img src={image} alt={name} />
         <Data>
           <div>Name: {name}</div>
