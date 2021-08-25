@@ -24,3 +24,11 @@ export const clearDigit = (digit) => {
     })
   }
 }
+
+export const sendData = (data) => {
+  return (dispatch) =>
+    dispatch({
+      type: "ADD/USERDATA",
+      payload: data,
+    })
+}

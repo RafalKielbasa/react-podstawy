@@ -6,10 +6,10 @@ import AboutMe from "./Components/Pages/AboutMe"
 import Counter from "./Components/Pages/Counter"
 import MainPage from "./Components/Pages/MainPage"
 import Stoper from "./Components/Pages/Stoper"
-import Characters from "./Components/Pages/Characters/Characters"
+import Characters from "./Components/Pages/Characters"
 import Registration from "./Components/Pages/Registration"
 import LogIn from "./Components/Pages/LogIn"
-import CharacterInformation from "./Components/Pages/Characters/CharacterInformation"
+import CharacterInformation from "./Components/Pages/CharacterInformation"
 import useFetch from "./hooks/useFetch"
 
 const Content = styled.div`
@@ -60,7 +60,7 @@ function App() {
   const [page, changePage] = useState(1)
   const [status, changeStatus] = useState("")
   const [switchState, setSwitch] = useState(false)
-  const { response, error, isLoading } = useFetch(
+  const { response, isLoading } = useFetch(
     `https://rickandmortyapi.com/api/character/?page=${page}&status=${status}`,
     [page, status]
   )

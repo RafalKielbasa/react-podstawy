@@ -16,7 +16,7 @@ import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions"
 import ExposureIcon from "@material-ui/icons/Exposure"
 import SettingsInputHdmiIcon from "@material-ui/icons/SettingsInputHdmi"
 import FingerprintIcon from "@material-ui/icons/Fingerprint"
-import picture1 from "./Images/picture1.jpg"
+import picture1 from "../../Images/picture1.jpg"
 
 const FirstPart = styled.div`
   width: 100%;

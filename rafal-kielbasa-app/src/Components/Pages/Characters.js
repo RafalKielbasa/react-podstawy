@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
 import { Switch } from "@material-ui/core"
 
-import CreateList from "./CreateList"
+import CreateList from "../SupportComponents/CreateList"
 
 const Container = styled.div`
   width: 99%;

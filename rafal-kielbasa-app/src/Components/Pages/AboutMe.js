@@ -7,7 +7,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess"
 import ExpandMore from "@material-ui/icons/ExpandMore"
 import { makeStyles } from "@material-ui/core/styles"
 import Collapse from "@material-ui/core/Collapse"
-import rafalkielbasa from "./Images/rafal-kielbasa.jpg"
+import rafalkielbasa from "../../Images/rafal-kielbasa.jpg"
 
 const useStyles = makeStyles((theme) => ({
   root: {

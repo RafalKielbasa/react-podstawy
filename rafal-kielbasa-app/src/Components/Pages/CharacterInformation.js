@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import styled from "styled-components"
 import { useParams } from "react-router"
 import { useHistory } from "react-router-dom"
-import useFetch from "../../../hooks/useFetch"
+import useFetch from "../../hooks/useFetch"
 
 const Container = styled.div`
   padding-top: 6%;

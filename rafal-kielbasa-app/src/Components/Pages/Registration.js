@@ -1,49 +1,40 @@
 import React from "react"
-import { FormControl, InputLabel, Input, Button } from "@material-ui/core"
-import styled from "styled-components"
+import { useSelector, useDispatch } from "react-redux"
+import { bindActionCreators } from "redux"
+import { actionCreators } from "../State/index"
 
-const Container = styled.div`
-  width: 100%;
-  height: 90.3%;
-  padding-top: 5%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-`
-
-const StyledForm = styled.form`
-  margin-top: 3%;
-  width: 10%;
-  display: flex;
-  flex-direction: column;
-`
+import FormComponent from "../SupportComponents/FormComponent"
 
 function Registration() {
-  const formObject = [
+  const userDataState = useSelector((state) => state.userData)
+  const dispatch = useDispatch()
+  const { sendData } = bindActionCreators(actionCreators, dispatch)
+
+  const registrationArray = [
     { id: 1, inputName: "Name" },
-    { id: 2, inputName: "Lastname" },
+    { id: 2, inputName: "Last_name" },
     { id: 3, inputName: "Email" },
     { id: 4, inputName: "Password" },
   ]
 
+  const onSubmit = (data) => {
+    if (
+      userDataState
+        .map((e) => e.email === data.email)
+        .some((e) => e === true) === true
+    ) {
+      return alert("This email is already used!")
+    } else {
+      return sendData(data)
+    }
+  }
+  console.log(userDataState.map((e) => e))
   return (
-    <Container>
-      <StyledForm>
-        <h1>Registration</h1>
-        {formObject.map((e) => {
-          return (
-            <FormControl key={e.id}>
-              <InputLabel>{e.inputName}</InputLabel>
-              <Input type="text" />
-            </FormControl>
-          )
-        })}
-        <Button type="submit" variant="outlined" color="secondary">
-          Submit
-        </Button>
-      </StyledForm>
-    </Container>
+    <FormComponent
+      name={"Registration"}
+      formArray={registrationArray}
+      submitFunction={onSubmit}
+    />
   )
 }
 export default Registration
