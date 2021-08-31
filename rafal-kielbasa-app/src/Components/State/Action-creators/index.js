@@ -32,3 +32,11 @@ export const sendData = (data) => {
       payload: data,
     })
 }
+
+export const setIteration = (data) => {
+  return (dispatch) =>
+    dispatch({
+      type: "SET/ITERATION",
+      payload: data,
+    })
+}

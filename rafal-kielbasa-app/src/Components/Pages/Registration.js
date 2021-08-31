@@ -1,9 +1,8 @@
 import React from "react"
+import FormComponent from "../SupportComponents/FormComponent"
 import { useSelector, useDispatch } from "react-redux"
 import { bindActionCreators } from "redux"
-import { actionCreators } from "../State/index"
-
-import FormComponent from "../SupportComponents/FormComponent"
+import { actionCreators } from "../State"
 
 function Registration() {
   const userDataState = useSelector((state) => state.userData)
@@ -25,10 +24,10 @@ function Registration() {
     ) {
       return alert("This email is already used!")
     } else {
-      return sendData(data)
+      return [sendData(data), alert(`Welcome ${data.name}`)]
     }
   }
-  console.log(userDataState.map((e) => e))
+
   return (
     <FormComponent
       name={"Registration"}

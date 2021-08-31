@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom"
 import styled from "styled-components"
-
+import useFetch from "./hooks/useFetch"
 import { useState, useEffect } from "react"
 import AboutMe from "./Components/Pages/AboutMe"
 import Counter from "./Components/Pages/Counter"
@@ -10,7 +10,7 @@ import Characters from "./Components/Pages/Characters"
 import Registration from "./Components/Pages/Registration"
 import LogIn from "./Components/Pages/LogIn"
 import CharacterInformation from "./Components/Pages/CharacterInformation"
-import useFetch from "./hooks/useFetch"
+import SuccessLogin from "./Components/Pages/SuccessLogin"
 
 const Content = styled.div`
   height: 94%;
@@ -133,7 +133,7 @@ function App() {
             <AboutMe />
           </Route>
           <Route exact path="/stoper">
-            <Stoper start={10} increment={10} />
+            <Stoper start={10} />
           </Route>
           <Route exact path="/counter">
             <Counter />
@@ -157,6 +157,9 @@ function App() {
           </Route>
           <Route exact path="/log-in">
             <LogIn />
+          </Route>
+          <Route path="/success-login">
+            <SuccessLogin />
           </Route>
         </Switch>
       </Content>

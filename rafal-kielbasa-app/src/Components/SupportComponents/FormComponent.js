@@ -38,7 +38,7 @@ function FormComponent({ name, formArray, submitFunction }) {
             </FormControl>
           )
         })}
-        <Button type="submit" variant="outlined" color="secondary">
+        <Button type="submit" color="primary">
           Submit
         </Button>
       </StyledForm>

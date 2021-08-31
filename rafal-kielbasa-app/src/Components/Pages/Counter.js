@@ -7,7 +7,7 @@ import styled from "styled-components"
 const Container = styled.div`
   padding-top: 6%;
   width: 100%;
-  height: 89vh;
+  height: 85%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,6 +17,13 @@ const Outcome = styled.div`
   font-weight: 800;
   color: ${({ number }) =>
     number % 5 === 0 && number !== 0 ? "green" : "black"};
+`
+const StyledButton = styled.button`
+  background-color: #0c2934;
+  color: white;
+  padding: 5px;
+  margin: 5px;
+  width: 70px;
 `
 function Counter() {
   const counterState = useSelector((state) => state.counter)
@@ -29,9 +36,9 @@ function Counter() {
     <Container>
       <Outcome number={counterState}> {counterState}</Outcome>
       <div>
-        <button onClick={() => addDigit(1)}>Add</button>
-        <button onClick={() => clearDigit(0)}>Clear</button>
-        <button onClick={() => subtractDigit(1)}>Subtract</button>
+        <StyledButton onClick={() => addDigit(1)}>Add</StyledButton>
+        <StyledButton onClick={() => clearDigit(0)}>Clear</StyledButton>
+        <StyledButton onClick={() => subtractDigit(1)}>Subtract</StyledButton>
       </div>
     </Container>
   )

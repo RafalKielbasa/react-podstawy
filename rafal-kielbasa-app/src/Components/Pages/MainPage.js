@@ -7,7 +7,6 @@ import {
   ThemeProvider,
   createTheme,
 } from "@material-ui/core/styles"
-
 import { grey } from "@material-ui/core/colors"
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople"
 import ButtonBase from "@material-ui/core/ButtonBase"
@@ -169,7 +168,7 @@ function MainPage() {
               <IconStyled Icon={EmojiPeopleIcon} />
               <ButtonTitle>About me </ButtonTitle>
               <TextDiv>
-                This part contains some information about my life
+                This part contains some information from my life
               </TextDiv>
             </ButtonDiv>
           </ButtonBase>
