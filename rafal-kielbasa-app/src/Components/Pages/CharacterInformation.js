@@ -12,7 +12,10 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 `
-
+const StyledButton = styled.button`
+  position: relative;
+  left: 0;
+`
 function CharacterInformation() {
   const slug = useParams()
   const history = useHistory()
@@ -36,12 +39,14 @@ function CharacterInformation() {
   ]
 
   return (
-    <Container>
-      {charactersInfo.map((e) => {
-        return <div>{`${e.name} ${e.data}`}</div>
-      })}
+    <div>
       <button onClick={() => history.push("/characters")}>Back</button>
-    </Container>
+      <Container>
+        {charactersInfo.map((e) => {
+          return <div>{`${e.name} ${e.data}`}</div>
+        })}
+      </Container>
+    </div>
   )
 }
 
